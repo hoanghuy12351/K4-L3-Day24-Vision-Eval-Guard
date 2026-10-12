@@ -69,4 +69,4 @@ Người tích hợp/chạy batch: Nguyễn Lê Phước Tiến - 2A202602616; t
 
 ## Cập nhật sau khi nộp
 
-Chưa nộp bản cuối. Nếu có sửa sau deadline, nhóm phải ghi commit, thời điểm, lý do và xác nhận của coach tại đây.
+Phiên bản nộp được ghi nhận trên nhánh `main`, commit `cec60c4167adae4824b77232110402b9064ccf05`, push lúc 19:45 ngày 12/10/2026 (UTC+07:00), trước deadline 23:59 cùng ngày. Lần cập nhật này chỉ hoàn thiện thông tin hồ sơ nộp và cũng được thực hiện trước deadline. Hiện không có cập nhật nào sau deadline; nếu phát sinh, nhóm sẽ ghi rõ commit, thời điểm, lý do và xác nhận của coach tại mục này.
