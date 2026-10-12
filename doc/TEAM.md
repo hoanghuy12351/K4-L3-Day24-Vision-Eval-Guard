@@ -8,7 +8,7 @@ Trưởng nhóm/người nộp: Võ Huy Hoàng - 2A202602548.
 
 Ngày lab/deadline áp dụng: 23:59 ngày 12/10/2026 — Asia/Ho_Chi_Minh (UTC+07:00).
 
-Commit main dùng làm mốc tổng hợp trước khi hoàn thiện hồ sơ nộp: `c59ffb7b1c8ddde8688574103363de1e1c64f85a` (merge PR #3).
+Commit dùng để chấm: `10664ac` — commit hoàn thiện TEAM, ba báo cáo và chuẩn hóa provenance artifacts; lịch sử trước đó được tổng hợp qua `main` tại merge `c59ffb7b1c8ddde8688574103363de1e1c64f85a`.
 
 ## Thành viên và phân công
 
