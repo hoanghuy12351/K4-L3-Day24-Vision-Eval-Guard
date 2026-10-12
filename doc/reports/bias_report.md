@@ -1,11 +1,13 @@
 # Đánh giá LLM Judge Phase B
 
-Nhóm: Nhóm thực hiện K4 Track 3A
+Nhóm: Vision
 
 Người phụ trách: Lê Việt Hoàng - 2A202602596
 
 Nguồn: `artifacts/judge_results.json`; run timestamp: 2026-10-12T11:31:22.501355+00:00.
 Models generation/judge: gpt-5-nano-2025-08-07 và openai/gpt-4o-mini.
+
+Trạng thái kiểm chứng: số liệu dưới đây được đọc nguyên trạng từ artifact live hiện có. Artifact ban đầu ghi hash trên checkout Windows dùng CRLF; nhóm đã xác minh các hash đó khớp chính xác biến thể CRLF của source hiện tại và chuẩn hóa metadata hash sang byte LF của checkout tổng hợp. Không thay đổi input JSON, judgment hoặc kết quả bias/calibration.
 
 ## Năm cặp A/B và hai lượt
 

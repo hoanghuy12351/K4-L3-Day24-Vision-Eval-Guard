@@ -1,13 +1,15 @@
 # Blueprint CI/CD cho RAG và guardrails
 
-Nhóm: K4-Track-3A-Team
+Nhóm: Vision
 
-Người phụ trách: Nguyễn Hoàng Nam
+Người phụ trách: Nguyễn Hoàng Nam - 2A202602485
 
 Đây là **đề xuất CI/CD**, không phải workflow đã được triển khai/chạy.
-Nguồn kết quả: artifacts/ragas_50q.json, judge_results.json, guard_results.json.
-Run timestamp: 2026-10-12T11:33:14.981746+00:00; guard models: ["gpt-4o-mini"].
-Models generation/evaluator/judge từ A/B: Chưa chạy Phase A và Phase B trong đợt này (ghi nhận từ artifacts tương ứng khi hoàn tất).
+Nguồn kết quả: `artifacts/ragas_50q.json`, `artifacts/judge_results.json`, `artifacts/guard_results.json`.
+Run timestamps: Phase A `2026-10-12T11:23:59.175669+00:00`; Phase B `2026-10-12T11:31:22.501355+00:00`; Phase C `2026-10-12T11:33:14.981746+00:00`.
+Models: generation `gpt-5-nano-2025-08-07`; evaluator `gpt-5-nano` + `text-embedding-3-small`; judge `openai/gpt-4o-mini`; guard `gpt-4o-mini`.
+
+Trạng thái kiểm chứng: báo cáo tổng hợp nguyên trạng ba artifacts live hiện có. Các lượt chạy ban đầu ghi hash trên checkout Windows dùng CRLF; nhóm đã xác minh toàn bộ hash cũ khớp chính xác biến thể CRLF của source hiện tại và chuẩn hóa metadata hash sang byte LF của checkout tổng hợp. Không thay đổi input JSON, metrics, judgments, guard results hoặc latency samples.
 
 ## Kiến trúc và failure action
 
@@ -53,6 +55,8 @@ Bottleneck chính nằm ở NeMo input rail khi gọi API LLM từ xa qua mạng
 Mốc bắt buộc lab vẫn attacks ≥15/20; bonus ≥18/20 kèm clean controls đạt.
 Đề xuất triển khai GitHub Actions Workflow chạy script `check_lab.py --with-tests` tự động tại mỗi Pull Request. Nếu tỷ lệ attack pass < 15/20 hoặc clean allowed < 8/8, script sẽ trả mã thoát nonzero (`exit 1`) làm fail CI build. Các biến MIN_* là đề xuất chất lượng, quy trình CI này hiện ở mức thiết kế kiến trúc chuẩn bị triển khai.
 
+Đối chiếu lượt chạy hiện có: RAGAS avg_score toàn bộ xấp xỉ **0.6468**, dưới gate 0.65; faithfulness toàn bộ xấp xỉ **0.5396**, dưới gate 0.75. Phase B đạt κ = **1.0** nhưng position inconsistency là **3/5 (60%)**, do đó vẫn cần swap-and-average và human review cho tie. Phase C đạt **19/20 attacks**, **8/8 clean** và **4/4 output cases**, đáp ứng gate chức năng đề xuất; latency input guard P95 **1749.34 ms** chưa đạt target 500 ms.
+
 ## Monitoring và cải tiến
 
 Giám sát thời gian thực các chỉ số:
@@ -62,9 +66,9 @@ Giám sát thời gian thực các chỉ số:
 - **Latency Monitoring**: Ghi log P95 latency của từng tầng, phát hiện suy thoái hiệu năng mạng gọi LLM.
 - **Bảo mật và Quyền riêng tư**: Tất cả log PII trước khi lưu trữ phải được anonymize triệt để.
 
-RAGAS mean/worst distribution: chưa đo (thuộc Phase A).
-Cohen’s κ: chưa đo (thuộc Phase B).
-Attacks passed: 19/20; clean false_positive_rate: 0.0.
+RAGAS: factual mean **0.7278**, multi-hop mean **0.5424**, adversarial mean **0.6936**; nhóm yếu nhất là `multi_hop`, và `faithfulness` là worst metric của **23/50** câu.
+Cohen’s κ: **1.0** trên 10 nhãn; position bias/inconsistency **60%** trên 5 cặp; verbosity win rate **100%** trên 2 decisive cases, chỉ là tín hiệu cần đọc nội dung.
+Guardrails: attacks passed **19/20**; clean **8/8**, false-positive rate **0.0**; output cases **4/4**.
 
 Các hướng cải tiến cụ thể:
 

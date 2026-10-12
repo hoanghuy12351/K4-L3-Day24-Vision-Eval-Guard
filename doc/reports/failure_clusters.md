@@ -8,6 +8,8 @@ Nguồn: `artifacts/ragas_50q.json`; run timestamp: `2026-10-12T11:23:59.175669+
 Chạy Phase A trên 50 answers đã lưu; mỗi answer có 3 contexts. Cả 50 answers có `generation_mode=llm`, không có `extractive_fallback`. Có 18 câu trả lời nguyên văn “Không tìm thấy.” và 1 câu (ID 44) trả lời biến thể không dấu “Khong tim thay.”. Tính cả hai kiểu từ chối, tổng là **19/50**: factual 5/20, multi_hop 11/20, adversarial 3/10.
 Models theo metadata: generation `gpt-5-nano-2025-08-07`; evaluator `gpt-5-nano` và `text-embedding-3-small`. Đây là ID do report ghi nhận, không phải bằng chứng alias provider đã giải quyết thành snapshot cụ thể.
 
+Trạng thái kiểm chứng: số liệu dưới đây được đọc nguyên trạng từ artifact live hiện có. Artifact ban đầu ghi hash trên checkout Windows dùng CRLF; nhóm đã xác minh hash đó khớp chính xác biến thể CRLF của source hiện tại và chuẩn hóa metadata hash sang byte LF của checkout tổng hợp. Không thay đổi input JSON, metric hoặc kết quả RAGAS.
+
 ## Điểm theo distribution
 
 Các điểm lấy từ `per_distribution`, làm tròn 4 chữ số thập phân.
